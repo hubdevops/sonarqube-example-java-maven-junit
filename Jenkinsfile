@@ -1,14 +1,15 @@
 pipeline {
-  agent {
-    docker {
-      image 'alpine'
-    }
-
-  }
+  agent any
   stages {
-    stage('error') {
+    stage('Test') {
+      agent {
+        docker {
+          image 'maven:3-jdk-8-alpine'
+        }
+
+      }
       steps {
-        build 'job1'
+        sh 'mvn test'
       }
     }
   }
